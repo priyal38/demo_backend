@@ -19,7 +19,7 @@ const tokenValidation = (req: customRequest, res: Response, next: NextFunction):
         JWT_SECRET,
         (err: any, decoded: any) => {
             if (err) return res.status(403).json({ message: "invalid token"}); // invalid token
-            req.user = decoded.username;
+            req.user = decoded.email;
             next();
         }
     );

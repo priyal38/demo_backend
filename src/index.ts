@@ -4,6 +4,7 @@ import cors from "cors"
 import indexRoutes from "./routes/index"
 import connection from "./db";
 import cookieparser from "cookie-parser";
+import requestsValidator from "./middleware/requestValidator";
 
 const app = express();
 app.use(json())
@@ -14,6 +15,7 @@ app.use(cors(
     }
 )); 
 app.use(cookieparser());
+app.use(requestsValidator)
 
 connection();
 

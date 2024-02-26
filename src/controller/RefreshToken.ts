@@ -16,9 +16,9 @@ const RefreshToken = async (req: Request, res: Response) => {
         if (!user) return res.sendStatus(403); // Forbidden 
 
         jwt.verify(refreshToken, JWT_REFRESH_SECRET, async (err:any, decoded: any) => {
-            if (err || user?.username !== decoded.username) return res.sendStatus(403);
+            if (err || user?.email !== decoded.email) return res.sendStatus(403);
 
-            const accessToken = jwt.sign({ userId: decoded._id, username: decoded.username }, JWT_SECRET, { expiresIn: '10s' });
+            const accessToken = jwt.sign({ userId: decoded._id, email: decoded.email }, JWT_SECRET, { expiresIn: '10s' });
 
             res.status(200).json({ accessToken });
         });
